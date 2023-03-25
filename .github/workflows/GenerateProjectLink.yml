@@ -25,7 +25,7 @@ jobs:
             - name: Add links to index.html
               run: |
                   cd ${{ github.workspace }}
-                  INDEX_FILES=(${{ env.INDEX_FILES }})
+                  INDEX_FILES==$GITHUB_ENV.INDEX_FILES
                   for INDEX_FILE in ${INDEX_FILES[@]}; do
                     PROJECT_NAME=$(dirname ${INDEX_FILE})
                     echo "<a href='${PROJECT_NAME}/index.html'>${PROJECT_NAME}</a>" >> index.html
