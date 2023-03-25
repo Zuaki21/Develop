@@ -21,8 +21,8 @@ jobs:
                   ls -R
                   echo "---------------------------------------------}"
                   echo "${INDEX_FILES}"
-                  echo "${INDEX_FILES[1]}"
-                  echo "${INDEX_FILES[2]}"
+                  echo "${INDEX_FILES[1]}(24)"
+                  echo "${INDEX_FILES[2]}(25)"
 
             - name: Add links to index.html
               run: |
