@@ -1,4 +1,5 @@
 import os
+import subprocess
 from datetime import datetime, timezone, timedelta
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 env = Environment(
@@ -6,6 +7,16 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml']),
     extensions=['jinja2.ext.i18n']
 )
+
+
+def get_commit_time(filepath):
+    cmd = ['git', 'log', '-1', '--format=%cd', '--', filepath]
+    try:
+        result = subprocess.run(
+            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
+        return result.stdout.decode('utf-8').strip()
+    except subprocess.CalledProcessError:
+        return None
 
 
 def collect_links():
@@ -17,12 +28,13 @@ def collect_links():
                     path = os.path.join(root, file)
                     project_name = os.path.basename(os.path.dirname(path))
                     # ファイルの更新日時を取得し、日付時刻オブジェクトに変換する
-                    mod_time = os.path.getmtime(path)
-                    dt_object = datetime.fromtimestamp(
-                        mod_time, tz=timezone.utc) + timedelta(hours=9)
-                    # 更新日時をリンクに追加する
-                    link = f'<a href="{path}">{project_name}</a> ({dt_object.strftime("%Y/%m/%d %H:%M")}更新)'
-                    links.append((dt_object, link))
+                    commit_time = get_commit_time(path)
+                    if commit_time is not None:
+                        dt_object = datetime.strptime(
+                            commit_time, "%a %b %d %H:%M:%S %Y %z")
+                        # 更新日時をリンクに追加する
+                        link = f'<a href="{path}">{project_name}</a> ({dt_object.strftime("%Y/%m/%d %H:%M")}更新)'
+                        links.append((dt_object, link))
     # 更新日時でソートされたリンクのリストを返す(最近更新された順)
     return [link[1] for link in sorted(links, reverse=True)]
 
