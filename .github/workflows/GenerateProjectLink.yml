@@ -17,7 +17,7 @@ jobs:
             - name: Find project index.html files
               run: |
                   cd ${{ github.workspace }}
-                  INDEX_FILES=$(find . -type f -name 'index.html' -path './*/index.html')
+                  INDEX_FILES=$(find . -type f -name 'index.html' -path './project*/' -o -path './projects/*/index.html')
                   echo "::set-output name=index_files::${INDEX_FILES}"
 
             - name: Add links to index.html
