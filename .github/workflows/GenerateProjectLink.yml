@@ -17,7 +17,7 @@ jobs:
             - name: Find project index.html files
               run: |
                   cd ${{ github.workspace }}
-                  INDEX_FILES=$(find . -type f -name 'index.html' -path './*')
+                  INDEX_FILES=$(find . -type f -name 'index.html')
                   ls -R
                   echo "---------------------------------------------}"
                   echo "${INDEX_FILES}"
