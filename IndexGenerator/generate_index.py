@@ -1,5 +1,6 @@
 import os
 import subprocess
+import json
 from datetime import datetime, timezone, timedelta
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 env = Environment(
@@ -7,16 +8,6 @@ env = Environment(
     autoescape=select_autoescape(['html', 'xml']),
     extensions=['jinja2.ext.i18n']
 )
-
-
-def get_commit_time(filepath):
-    cmd = ['git', 'log', '-1', '--format=%cd', '--', filepath]
-    try:
-        result = subprocess.run(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
-        return result.stdout.decode('utf-8').strip()
-    except subprocess.CalledProcessError:
-        return None
 
 
 def collect_links():
@@ -27,16 +18,14 @@ def collect_links():
                 if file == "index.html":
                     path = os.path.join(root, file)
                     project_name = os.path.basename(os.path.dirname(path))
-                    # ファイルの更新日時を取得し、日付時刻オブジェクトに変換する
-                    commit_time = get_commit_time(path)
-                    if commit_time is not None:
-                        dt_object = datetime.strptime(
-                            commit_time, "%a %b %d %H:%M:%S %Y %z")
-                        # 更新日時をリンクに追加する
-                        link = f'<a href="{path}">{project_name}</a> ({dt_object.strftime("%Y/%m/%d %H:%M")}更新)'
-                        links.append((dt_object, link))
-    # 更新日時でソートされたリンクのリストを返す(最近更新された順)
-    return [link[1] for link in sorted(links, reverse=True)]
+                    dir = os.path.dirname(path)
+                    timeText, dayTime = get_last_updated(dir)
+                    # 更新日時をリンクに追加する
+                    link = f'<a href="{path}">{project_name}</a> ({timeText})'
+                    # リンクと更新日時をタプルにしてリストに追加する
+                    links.append((dayTime, link))
+    # リストを更新日時でソートする
+    return [link[1] for link in sorted(links, reverse=True, key=lambda x: x[0])]
 
 
 def render_template(links):
@@ -46,6 +35,20 @@ def render_template(links):
     output = template.render(data)
     with open("index.html", "w") as f:
         f.write(output)
+
+
+def get_last_updated(dir):
+    # ファイルの存在を確認する
+    if os.path.exists(dir+"/repo_info.json"):
+        # dirからファイルパスを取得する
+        with open(dir+"/repo_info.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+        last_updated = data["last_updated"]
+        # 更新日時をDateTime型に変換する
+        dayTime = datetime.strptime(last_updated, '%Y/%m/%d %H:%M')
+        return last_updated+"更新", dayTime
+    else:
+        return "更新日時不明", None
 
 
 if __name__ == "__main__":
