@@ -20,7 +20,9 @@ jobs:
                   INDEX_FILES=$(find . -type f -name 'index.html' -path './*')
                   ls -R
                   echo "---------------------------------------------}"
-                  echo "::set-output name=index_files::${INDEX_FILES}"
+                  echo "${INDEX_FILES}"
+                  echo "${INDEX_FILES[1]}"
+                  echo "${INDEX_FILES[2]}"
 
             - name: Add links to index.html
               run: |
