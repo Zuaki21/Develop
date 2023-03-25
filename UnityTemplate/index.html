@@ -6,7 +6,26 @@
     <title>Unity WebGL Player | AutoBuildPrac</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-  </head>
+  
+        <style>
+            /* フッターのスタイル */
+            footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                background-color: #f5f5f5;
+                color: #333;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            /* ページの本文をフッターの上に表示するためのスタイル */
+            body {
+                margin-bottom: 60px;
+            }
+        </style>
+        </head>
   <body>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
@@ -116,4 +135,17 @@
       document.body.appendChild(script);
     </script>
   </body>
-</html>
+
+    
+    
+    
+    
+    <footer style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="../../index.html" style="margin-left: 10px;">ホームへ戻る</a>
+        <a style="margin-right: 10px; margin-left: auto"> 最終更新 2023/03/26 00:03 </a>
+    </footer>
+    
+    
+    
+    
+    </html>
