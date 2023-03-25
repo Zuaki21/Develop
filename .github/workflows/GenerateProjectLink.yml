@@ -17,14 +17,14 @@ jobs:
             - name: Find project index.html files
               run: |
                   cd ${{ github.workspace }}
-                  echo "index=$(find . -type f -name 'index.html')" >> $GITHUB_OUTPUT
-                  echo "---------------------------------------------}"
+                  echo "index=$(find . -type f -name 'index.html')" >> $GITHUB_ENV
+                  echo "---------------------------------------------"
                   ls -R
 
             - name: Add links to index.html
               run: |
                   cd ${{ github.workspace }}
-                  INDEX_FILES=(${{ env.GITHUB_OUTPUT }})
+                  INDEX_FILES=(${{ env.GITHUB_ENV }})
                   for INDEX_FILE in ${INDEX_FILES[@]}; do
                     PROJECT_NAME=$(dirname ${INDEX_FILE})
                     echo "<a href='${PROJECT_NAME}/index.html'>${PROJECT_NAME}</a>" >> index.html
