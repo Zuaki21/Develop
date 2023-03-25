@@ -1,8 +1,11 @@
 name: Add project links to index.html
 
 on:
+    # mainブランチの更新時に自動で実行
     push:
-        branches: [main]
+        branches: main
+    # Actionから手動実行も可能
+    workflow_dispatch: {}
 
 jobs:
     add-links:
