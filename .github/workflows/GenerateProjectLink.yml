@@ -3,7 +3,7 @@ name: Add project links to index.html
 on:
     # mainブランチの更新時に自動で実行
     push:
-        branches: main
+        branches: gh-pages
     # Actionから手動実行も可能
     workflow_dispatch: {}
 
