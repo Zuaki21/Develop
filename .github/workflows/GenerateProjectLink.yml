@@ -11,23 +11,23 @@ jobs:
     add-links:
         runs-on: ubuntu-latest
         steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-      - name: Find project index.html files
-        run: |
-          cd ${{ github.workspace }}
-          echo "::set-env name=INDEX_FILES::$(find . -type f -name 'index.html')"
+            - name: Find project index.html files
+              run: |
+                  cd ${{ github.workspace }}
+                  echo "::set-env name=INDEX_FILES::$(find . -type f -name 'index.html')"
 
-      - name: Add links to index.html
-        run: |
-          cd ${{ github.workspace }}
-          INDEX_FILES=$INDEX_FILES
-          for INDEX_FILE in ${INDEX_FILES[@]}; do
-            PROJECT_NAME=$(dirname ${INDEX_FILE})
-            echo "<a href='${PROJECT_NAME}/index.html'>${PROJECT_NAME}</a>" >> index.html
-          done
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git commit -am "Add links to project index.html files"
-          git push
+            - name: Add links to index.html
+              run: |
+                  cd ${{ github.workspace }}
+                  INDEX_FILES=$INDEX_FILES
+                  for INDEX_FILE in ${INDEX_FILES[@]}; do
+                    PROJECT_NAME=$(dirname ${INDEX_FILE})
+                    echo "<a href='${PROJECT_NAME}/index.html'>${PROJECT_NAME}</a>" >> index.html
+                  done
+                  git config --global user.email "actions@github.com"
+                  git config --global user.name "GitHub Actions"
+                  git commit -am "Add links to project index.html files"
+                  git push
