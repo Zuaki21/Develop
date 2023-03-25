@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -18,7 +18,8 @@ def collect_links():
                     project_name = os.path.basename(os.path.dirname(path))
                     # ファイルの更新日時を取得し、日付時刻オブジェクトに変換する
                     mod_time = os.path.getmtime(path)
-                    dt_object = datetime.fromtimestamp(mod_time)
+                    dt_object = datetime.fromtimestamp(
+                        mod_time, tz=timezone.utc) + timedelta(hours=9)
                     # 更新日時をリンクに追加する
                     link = f'<a href="{path}">{project_name}</a> ({dt_object.strftime("%Y/%m/%d %H:%M")}更新)'
                     links.append((dt_object, link))
