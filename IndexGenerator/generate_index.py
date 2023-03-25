@@ -1,6 +1,11 @@
 import os
-from jinja2 import Environment, FileSystemLoader
 from datetime import datetime
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+env = Environment(
+    loader=FileSystemLoader('.'),
+    autoescape=select_autoescape(['html', 'xml']),
+    extensions=['jinja2.ext.i18n']
+)
 
 
 def collect_links():
