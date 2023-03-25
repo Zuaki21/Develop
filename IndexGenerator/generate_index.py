@@ -17,13 +17,13 @@ def collect_links():
                     # 更新日時をリンクに追加する
                     link = f'<a href="{path}">{project_name}</a> ({dt_object.strftime("%Y/%m/%d %H:%M")}更新)'
                     links.append((dt_object, link))
-    # 更新日時でソートされたリンクのリストを返す
-    return [link[1] for link in sorted(links)]
+    # 更新日時でソートされたリンクのリストを返す(最近更新された順)
+    return [link[1] for link in sorted(links, reverse=True)]
 
 
 def render_template(links):
     env = Environment(loader=FileSystemLoader("."))
-    template = env.get_template("template.html")
+    template = env.get_template("IndexGenerator/template.html")
     data = {"links": links}
     output = template.render(data)
     with open("index.html", "w") as f:
