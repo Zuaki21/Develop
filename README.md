@@ -1,10 +1,10 @@
-# Unity自動ビルドの公開ページ
+# Unity自動ビルドの公開用リポジトリ
 
-[自動ビルド一覧はこちら](https://game.zuaki.jp/develop/)
+[公開ページはこちら](https://game.zuaki.jp/develop/)
 
 ## 説明
 
-[テンプレ](https://github.com/Zuaki21/UnityTemplate)からプロジェクトを作るとMainへのpush時に自動でビルドされ、このリポジトリ内に追加されます
+[Unityプロジェクトのテンプレ](https://github.com/Zuaki21/UnityTemplate)からプロジェクトを作るとMainへのpush時に自動でビルドされ、このリポジトリ内に追加されます
 
 また、pythonのコードが動いて自動ビルド一覧のページにリンクが生成されます
 
