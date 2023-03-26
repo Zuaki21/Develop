@@ -3,6 +3,7 @@ import subprocess
 import json
 from datetime import datetime, timezone, timedelta
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+import pytz
 env = Environment(
     loader=FileSystemLoader('.'),
     autoescape=select_autoescape(['html', 'xml']),
@@ -19,9 +20,10 @@ def collect_links():
                     path = os.path.join(root, file)
                     project_name = os.path.basename(os.path.dirname(path))
                     dir = os.path.dirname(path)
-                    timeText, dayTime = get_last_updated(dir)
+                    timeText, dayTime, description = get_last_updated(dir)
                     # 更新日時をリンクに追加する
-                    link = f'<a href="{path}">{project_name}</a> ({timeText})'
+                    link = make_link(path, project_name,
+                                     timeText, dayTime, description)
                     # リンクと更新日時をタプルにしてリストに追加する
                     links.append((dayTime, link))
     # リストを更新日時でソートする
@@ -46,9 +48,45 @@ def get_last_updated(dir):
         last_updated = data["last_updated"]
         # 更新日時をDateTime型に変換する
         dayTime = datetime.strptime(last_updated, '%Y/%m/%d %H:%M')
-        return last_updated+"更新", dayTime
+
+        # 説明を取得する
+        description = data["description"]
+        if description is "" or description is None:
+            description = "説明文なし"
+
+        return last_updated+"更新", dayTime, description
     else:
-        return "更新日時不明", None
+        return "更新日時不明", None, "説明文不明"
+
+
+def make_link(path, project_name, timeText, dayTime, description):
+    text_color = "text-gray-400"
+
+    # dayTimeがNoneでない場合
+    if dayTime is not None:
+        # 日本時間のタイムゾーンオブジェクトを作成
+        jst = pytz.timezone('Asia/Tokyo')
+        # dayTimeを日本時間に変換
+        dayTime = jst.localize(dayTime)
+        # 1日以内の場合
+        if dayTime > datetime.now(jst) - timedelta(days=1):
+            text_color = "text-green-300"
+
+    # 更新日時をリンクに追加する
+    link = f'''
+    <a
+        class="border border-white rounded-lg p-4 h-full hover:bg-gray-800 flex flex-col block"
+        href="{path}"
+    >
+        <p class="text-white font-bold mb-2">{project_name}</p>
+        <p class="text-gray-400 text-sm mb-2">
+            {description}
+        </p>
+        <p class="{text_color} text-sm mt-auto ml-auto">
+            ({timeText})
+        </p>
+    </a>'''
+    return link
 
 
 if __name__ == "__main__":

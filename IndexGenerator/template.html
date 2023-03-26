@@ -3,53 +3,37 @@
     <head>
         <meta charset="utf-8" />
         <title>自動デプロイ一覧</title>
-        <link rel="stylesheet" href="style.css" />
-        <style>
-            body {
-                font-family: sans-serif;
-                text-align: center;
-            }
-
-            h1 {
-                margin-top: 2em;
-                margin-bottom: 1em;
-            }
-
-            p {
-                margin: 0.5em 0;
-            }
-
-            a {
-                text-decoration: none;
-                color: #0077ff;
-                font-weight: bold;
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-
-            code {
-                font-family: monospace;
-                font-weight: bold;
-                background-color: rgb(228, 228, 228);
-            }
-        </style>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
-        <div class="container">
-            <h1>Unity自動デプロイ一覧</h1>
-            <p>
-                <code>Zuaki21/UnityTemplate</code
-                >から作成されたプロジェクトが対象
-            </p>
-            <p>
-                mainブランチへのpush時に自動でビルドし、この一覧に追加されます
-            </p>
-            <hr />
-            {% for link in links %}
-            <p>{{ link }}</p>
-            {% endfor %}
+    <body
+        class="bg-gradient-to-r from-gray-800 to-gray-700 flex justify-center items-center h-screen"
+    >
+        <div class="container mx-auto">
+            <div class="px-2 text-center">
+                <h1 class="text-white text-2xl font-bold mb-4">
+                    Unity自動デプロイ一覧
+                </h1>
+                <p class="text-white mb-1">
+                    <a href="https://github.com/Zuaki21/UnityTemplate" target="_blank" rel="noopener noreferrer">
+                        <code
+                            class="bg-gray-800 text-green-300 px-1 py-0.5 rounded-md"
+                            >Zuaki21/UnityTemplate</code
+                        >
+                    </a>
+                    から作成されたプロジェクトが対象
+                </p>
+                <p class="text-white mb-4">
+                    mainブランチへのpush時に自動でビルドし、以下一覧に追加されます
+                </p>
+            </div>
+            <hr class="mb-4 ml-2 mr-2" />
+            <div class="flex flex-wrap">
+                {% for link in links %}
+                <div class="w-full md:w-1/3 px-2 mb-4">
+                    {{ link }}
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </body>
 </html>
