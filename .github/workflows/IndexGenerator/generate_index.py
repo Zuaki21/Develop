@@ -32,7 +32,8 @@ def collect_links():
 
 def render_template(links):
     env = Environment(loader=FileSystemLoader("."))
-    template = env.get_template("IndexGenerator/template.html")
+    template = env.get_template(
+        ".github/workflows/IndexGenerator/template.html")
     data = {"links": links}
     output = template.render(data)
     with open("index.html", "w") as f:
