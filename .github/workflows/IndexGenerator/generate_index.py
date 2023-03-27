@@ -25,7 +25,7 @@ def collect_links():
                     link = make_link(path, product_name,
                                      timeText, dayTime, description)
                     # リンクと更新日時をタプルにしてリストに追加する
-                    links.append((dayTime, link))
+                    links.append((dayTime, dir))
     # リストを更新日時でソートする
     return [link[1] for link in sorted(links, reverse=True, key=lambda x: x[0])]
 
