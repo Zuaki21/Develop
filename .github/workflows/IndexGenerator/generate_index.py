@@ -18,14 +18,14 @@ def collect_links():
             for file in files:
                 if file == "index.html":
                     path = os.path.join(root, file)
-                    dir = os.path.dirname(path)
+                    dir_path = os.path.dirname(path)
                     product_name, timeText, dayTime, description = get_last_updated(
-                        dir)
+                        dir_path)
                     # 更新日時をリンクに追加する
-                    link = make_link(path, product_name,
+                    link = make_link(dir_path, product_name,
                                      timeText, dayTime, description)
                     # リンクと更新日時をタプルにしてリストに追加する
-                    links.append((dayTime, dir))
+                    links.append((dayTime, link))
     # リストを更新日時でソートする
     return [link[1] for link in sorted(links, reverse=True, key=lambda x: x[0])]
 
