@@ -1,6 +1,6 @@
 # Unity自動ビルドの公開用リポジトリ
 
-[公開ページはこちら](https://game.zuaki.jp/develop/)
+[公開ページはこちら](https://game.zuaki.jp)
 
 ## 説明
 
