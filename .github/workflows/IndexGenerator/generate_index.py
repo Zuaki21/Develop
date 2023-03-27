@@ -18,11 +18,11 @@ def collect_links():
             for file in files:
                 if file == "index.html":
                     path = os.path.join(root, file)
-                    project_name = os.path.basename(os.path.dirname(path))
                     dir = os.path.dirname(path)
-                    timeText, dayTime, description = get_last_updated(dir)
+                    product_name, timeText, dayTime, description = get_last_updated(
+                        dir)
                     # 更新日時をリンクに追加する
-                    link = make_link(path, project_name,
+                    link = make_link(path, product_name,
                                      timeText, dayTime, description)
                     # リンクと更新日時をタプルにしてリストに追加する
                     links.append((dayTime, link))
@@ -55,9 +55,14 @@ def get_last_updated(dir):
         if description is "" or description is None:
             description = "説明文なし"
 
-        return last_updated+"更新", dayTime, description
+        # product_nameを取得する
+        product_name = data["name"]
+        if product_name is "" or product_name is None:
+            product_name = "プロジェクト名なし"
+
+        return product_name, last_updated+"更新", dayTime, description
     else:
-        return "更新日時不明", None, "説明文不明"
+        return "プロジェクト名不明", "更新日時不明", None, "説明文不明"
 
 
 def make_link(path, project_name, timeText, dayTime, description):
