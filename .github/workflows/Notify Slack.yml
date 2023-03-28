@@ -10,11 +10,19 @@ jobs:
         steps:
             - uses: slackapi/slack-github-action@v1.18.0
               with:
-                  payload: |
+              payload: |
+                  {
+                    "text": "作業プロジェクト一覧が更新されました! \n<https://game.zuaki.jp/develop/|作業プロジェクト一覧>が更新されました!\n<https://github.com/Zuaki21/develop/actions|Actionsを見る>",
+                    "blocks": [
                       {
-                        "text": "<https://game.zuaki.jp/develop/|作業プロジェクト一覧>が更新されました!/n<https://github.com/Zuaki21/develop/actions|Actionsを見る>"
-
+                        "type": "section",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "作業プロジェクト一覧が更新されました! \n<https://game.zuaki.jp/develop/|作業プロジェクト一覧>が更新されました!\n<https://github.com/Zuaki21/develop/actions|Actionsを見る>"
+                        }
                       }
+                    ]
+                  }
               env:
                   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     on-failure:
