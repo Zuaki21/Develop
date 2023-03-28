@@ -1,0 +1,31 @@
+name: slack_notify
+on:
+    workflow_run:
+        workflows: [Build Index Pages]
+        types: [completed] # 完了時
+jobs:
+    on-success:
+        runs-on: ubuntu-20.04
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        steps:
+            - uses: slackapi/slack-github-action@v1.18.0
+              with:
+                  payload: |
+                      {
+                        "text": "<https://game.zuaki.jp/develop/|作業プロジェクト一覧>が更新されました!/n<https://github.com/Zuaki21/develop/actions|Actionsを見る>"
+
+                      }
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    on-failure:
+        runs-on: ubuntu-20.04
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+        steps:
+            - uses: slackapi/slack-github-action@v1.18.0
+              with:
+                  payload: |
+                      {
+                        "text": "<https://game.zuaki.jp/develop/|作業プロジェクト一覧>の更新に失敗しました.../n<https://github.com/Zuaki21/develop/actions|Actionsを見る>"
+                      }
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
