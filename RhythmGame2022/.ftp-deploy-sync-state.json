@@ -1,7 +1,7 @@
 {
     "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
     "version": "1.0.0",
-    "generatedTime": 1680066826633,
+    "generatedTime": 1680070634366,
     "data": [
         {
             "type": "folder",
@@ -15,25 +15,25 @@
             "type": "file",
             "name": "index.html",
             "size": 5776,
-            "hash": "67ce8a73c3e469209a2ca494a80441f25d6ad4ece1e95e07f0d37cb5fd75aa68"
+            "hash": "3446116d9e36eb693987e6c95e9962aacc2ea05450b4020ceb63f22da9fe240a"
         },
         {
             "type": "file",
             "name": "repo_info.json",
             "size": 149,
-            "hash": "7ea6cd2d98ef43fd1a7be85d3f6367de1ae6dd8e5deed788a1851d8e57c1f383"
+            "hash": "cfcd446020fded79880c9aaec9b22b88950a46c4cef8510f21e3d64f57c1e93c"
         },
         {
             "type": "file",
             "name": "Build/WebGL.data.unityweb",
-            "size": 115236745,
-            "hash": "710106709ff473a8aa0a6aaf160d4505d00ee00268c203f3ec570ea4a9d3a81f"
+            "size": 115237012,
+            "hash": "4b8baf8ff2bc8a611cacfb2fe495856d1950e8d9d96ecfcd11a778ed8e49355e"
         },
         {
             "type": "file",
             "name": "Build/WebGL.framework.js.unityweb",
             "size": 84021,
-            "hash": "5a8f4643fb42b9bcac8922f8387007acc0397a17ac66b56463878682aa41f453"
+            "hash": "5b3fbda3e4e05fc313440d6627aee02453151aaaea5c3d0327a8080689b9db42"
         },
         {
             "type": "file",
@@ -45,7 +45,7 @@
             "type": "file",
             "name": "Build/WebGL.wasm.unityweb",
             "size": 10704466,
-            "hash": "0ca7468d394f2ea6f165fd92e589497652b21bbef9f092eaa7ddf84267af2818"
+            "hash": "63dc75d7b19c4df463da44bd2dfe4a83018581d1e105ecba14b5dfe031736edc"
         },
         {
             "type": "file",
