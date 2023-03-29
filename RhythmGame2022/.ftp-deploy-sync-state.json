@@ -1,7 +1,7 @@
 {
     "description": "DO NOT DELETE THIS FILE. This file is used to keep track of which files have been synced in the most recent deployment. If you delete this file a resync will need to be done (which can take a while) - read more: https://github.com/SamKirkland/FTP-Deploy-Action",
     "version": "1.0.0",
-    "generatedTime": 1680062788936,
+    "generatedTime": 1680066826633,
     "data": [
         {
             "type": "folder",
@@ -14,26 +14,26 @@
         {
             "type": "file",
             "name": "index.html",
-            "size": 5749,
-            "hash": "5944f11ebbb0c8652942e87f56946944243e90543d4b2c1fdf99d2505601e396"
+            "size": 5776,
+            "hash": "67ce8a73c3e469209a2ca494a80441f25d6ad4ece1e95e07f0d37cb5fd75aa68"
         },
         {
             "type": "file",
             "name": "repo_info.json",
             "size": 149,
-            "hash": "3ccf64c57de1089c09e023f02bdfc751a58cc9093577e5fda27d2480d471f888"
+            "hash": "7ea6cd2d98ef43fd1a7be85d3f6367de1ae6dd8e5deed788a1851d8e57c1f383"
         },
         {
             "type": "file",
             "name": "Build/WebGL.data.unityweb",
-            "size": 115236125,
-            "hash": "a1c87edff9fe481bf3da5e3e81c64a4f48505e72a5f6e46cd3492c9f3f11e322"
+            "size": 115236745,
+            "hash": "710106709ff473a8aa0a6aaf160d4505d00ee00268c203f3ec570ea4a9d3a81f"
         },
         {
             "type": "file",
             "name": "Build/WebGL.framework.js.unityweb",
             "size": 84021,
-            "hash": "2c7e8c3e8a86ddc4177ca3b20feeafa82d8d0d378d84bd6d3c18d34de94fccd3"
+            "hash": "5a8f4643fb42b9bcac8922f8387007acc0397a17ac66b56463878682aa41f453"
         },
         {
             "type": "file",
@@ -45,7 +45,7 @@
             "type": "file",
             "name": "Build/WebGL.wasm.unityweb",
             "size": 10704466,
-            "hash": "431dce91d460d095234601c84289eb921c7200d137feea3b4d88e5bca2879c9f"
+            "hash": "0ca7468d394f2ea6f165fd92e589497652b21bbef9f092eaa7ddf84267af2818"
         },
         {
             "type": "file",
