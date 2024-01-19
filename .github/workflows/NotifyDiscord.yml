@@ -1,0 +1,24 @@
+name: discord_
+on:
+    workflow_run:
+        workflows: [Build Index Pages]
+        types: [completed] # 完了時
+jobs:
+    on-success:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        steps:
+            - uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9 #0.3.2
+              env:
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+                  DISCORD_EMBEDS: >
+                      [{"title":"UnityProjectデプロイ完了","color":4781122,"description":
+                      "[作業プロジェクト一覧](https://game.zuaki.jp/develop/)"}]
+    on-failure:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+        steps:
+            - uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9 #0.3.2
+              env:
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+                  DISCORD_EMBEDS: '[{"title":"UnityProjectデプロイ失敗","color":13959168}]'
